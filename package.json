@@ -1,0 +1,53 @@
+{
+  "name": "remix-vite-express",
+  "private": true,
+  "sideEffects": false,
+  "type": "module",
+  "imports": {
+    "#*": "./*"
+  },
+  "scripts": {
+    "build": "cross-env PAYLOAD_CONFIG_PATH=./app/db/payload.config.ts npm run generate:types && remix vite:build",
+    "dev": "cross-env PAYLOAD_CONFIG_PATH=./app/db/payload.config.ts npm run generate:types && vite",
+    "start": "cross-env PAYLOAD_CONFIG_PATH=./app/db/payload.config.ts NODE_ENV=production node ./build/server/index.js",
+    "generate:types": "cross-env PAYLOAD_CONFIG_PATH=./app/db/payload.config.ts payload generate:types && node ./scripts/clean-payload-types.js",
+    "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
+    "typecheck": "tsc"
+  },
+  "dependencies": {
+    "@payloadcms/db-mongodb": "3.0.0-beta.40",
+    "@remix-run/node": "^2.9.1",
+    "@remix-run/react": "^2.9.1",
+    "@remix-run/serve": "^2.9.1",
+    "compression": "^1.7.4",
+    "cross-env": "^7.0.3",
+    "date-fns": "^3.6.0",
+    "dotenv": "^16.4.5",
+    "isbot": "^4.1.0",
+    "morgan": "^1.10.0",
+    "payload": "3.0.0-beta.40",
+    "react": "19.0.0-rc.0",
+    "react-dom": "19.0.0-rc.0",
+    "remix-create-express-app": "^0.3.12"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.7.3",
+    "@flydotio/dockerfile": "^0.5.7",
+    "@remix-run/dev": "^2.9.1",
+    "@types/compression": "^1.7.5",
+    "@types/morgan": "^1.9.9",
+    "@types/react": "npm:types-react@19.0.0-beta.2",
+    "@types/react-dom": "npm:types-react-dom@19.0.0-beta.2",
+    "remix-express-dev-server": "0.2.6",
+    "typescript": "^5.1.6",
+    "vite": "^5.1.0",
+    "vite-tsconfig-paths": "^4.2.1"
+  },
+  "overrides": {
+    "react": "$react",
+    "react-dom": "$react-dom"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
